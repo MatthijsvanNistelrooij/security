@@ -20,6 +20,7 @@ import {
 import gsap from "gsap"
 import { Planet } from "./Planet"
 import ProjectCards from "./ProjectCards"
+import { redirect, useNavigate } from "react-router-dom"
 
 const ShopModel = ({ cursorX }) => {
   const modelRef = useRef()
@@ -196,11 +197,10 @@ const Shop = () => {
     setShowLinks(!showLinks)
   }
 
+  const navigate = useNavigate()
+
   const handleClickSocials = () => {
-    setShowSocials(!showSocials)
-    setTimeout(() => {
-      setShowSocialsDiv(true)
-    }, 2000)
+    navigate("/contact")
   }
 
   const handleClickAbout = () => {
@@ -337,7 +337,7 @@ const Shop = () => {
                 onPointerOut={handlePointerOut}
                 opacity={opacity3}
               >
-                SOCIALS
+                CONTACT
               </Text>
             </animated.group>
 
