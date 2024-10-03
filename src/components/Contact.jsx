@@ -15,6 +15,14 @@ import { MathUtils } from "three"
 const Contact = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const navigate = useNavigate()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    return () => {
+      setMounted(false)
+    }
+  }, [])
 
   const handleClick = () => {
     navigate("/")
@@ -28,11 +36,15 @@ const Contact = () => {
   }
 
   useEffect(() => {
-    window.addEventListener("mousemove", handleMouseMove)
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove)
+    if (mounted) {
+      window.addEventListener("mousemove", handleMouseMove)
     }
-  }, [])
+    return () => {
+      if (mounted) {
+        window.removeEventListener("mousemove", handleMouseMove)
+      }
+    }
+  }, [mounted]) 
 
   return (
     <main className="flex flex-row h-screen w-screen bg-gray-800 absolute cursor-auto">
